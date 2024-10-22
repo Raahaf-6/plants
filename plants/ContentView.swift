@@ -1,44 +1,45 @@
-//
-//  ContentView.swift
-//  plants
-//
-//  Created by Rahaf on 20/10/2024.
-//
-
 import SwiftUI
 
 struct MyPlantsView: View {
     var body: some View {
         NavigationView {
-            VStack() {
+            VStack {
                 Text("My Plants🌱")
                     .bold()
                     .font(.largeTitle)
-                    .frame(maxWidth: .infinity,alignment: .leading)
-              //Rectangle
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                // Rectangle
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1)
-                    .padding(.bottom,170)
-                    
+                    .padding(.bottom, 120)
+
                 // Image
                 Image("planto") // Replace with your image name
                     .resizable()
                     .frame(width: 164, height: 200)
                     .scaledToFit()
-                   
-                    
 
+                Spacer().frame(height: 30)
+                
                 // First Text
                 Text("Start your plant journey!")
                     .font(.system(size: 25, weight: .semibold))
                     .multilineTextAlignment(.center)
 
+                // Add space between the first and second texts
+                Spacer().frame(height: 20)
+
                 // Second Text
                 Text("Now all your plants will be in one place and we will help you take care of them :)🪴")
+                    .frame(width: 330, height: 50)
                     .font(.system(size: 16, design: .default)) // Replace .default with .serif or .rounded for different typefaces
                     .foregroundColor(Color(red: 0.6235294117647059, green: 0.6235294117647059, blue: 0.5686274509803921))
                     .multilineTextAlignment(.center)
+
+                // Add space between the second text and the button
+                Spacer().frame(height: 30)
 
                 // Button
                 Button(action: {
@@ -53,9 +54,8 @@ struct MyPlantsView: View {
                         .cornerRadius(10)
                 }
             }
-           
             .padding(22)
-            .padding(.bottom,190)
+            .padding(.bottom, 170)
         }
     }
 }
