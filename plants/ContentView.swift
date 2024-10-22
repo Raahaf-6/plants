@@ -13,7 +13,7 @@ struct MyPlantsView: View {
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1)
-                    .padding(.bottom, 120)
+                    .padding(.bottom, 90)
 
                 // Image
                 Image("planto") // Replace with your image name
