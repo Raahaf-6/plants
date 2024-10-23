@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SetReminder: View {
+    
     @ObservedObject var reminderModel = PlantReminderModel()
     @Environment(\.dismiss) var dismiss
     @State private var taskName: String = ""
@@ -93,4 +94,3 @@ struct PickerRow: View {
 #Preview {
     SetReminder()
 }
-

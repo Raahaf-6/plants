@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MyPlantsView: View {
+    @State private var showingSetReminder = false // State variable to control sheet presentation
+
     var body: some View {
         NavigationView {
             VStack {
@@ -34,16 +36,16 @@ struct MyPlantsView: View {
                 // Second Text
                 Text("Now all your plants will be in one place and we will help you take care of them :)🪴")
                     .frame(width: 330, height: 50)
-                    .font(.system(size: 16, design: .default)) // Replace .default with .serif or .rounded for different typefaces
+                    .font(.system(size: 16, design: .default))
                     .foregroundColor(Color(red: 0.6235294117647059, green: 0.6235294117647059, blue: 0.5686274509803921))
                     .multilineTextAlignment(.center)
 
                 // Add space between the second text and the button
                 Spacer().frame(height: 30)
 
-                // Button
+                // Button to present SetReminder view as a sheet
                 Button(action: {
-                    // Action for button
+                    showingSetReminder.toggle() // Toggle the sheet visibility
                 }) {
                     Text("Set Plant Reminder")
                         .font(.system(size: 14))
@@ -56,6 +58,9 @@ struct MyPlantsView: View {
             }
             .padding(22)
             .padding(.bottom, 170)
+        }
+        .sheet(isPresented: $showingSetReminder) {
+            SetReminder() // Present the SetReminder view as a sheet
         }
     }
 }

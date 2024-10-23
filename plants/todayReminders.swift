@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct todayReminders: View {
+struct TodayReminders: View {
+    @State private var completionStatus: [Bool] = [false, false] // Track completion for each plant
+    @State private var plants = ["Pothos", "Pothos"] // List of plants
+
     var body: some View {
         NavigationView {
             VStack {
@@ -9,135 +12,110 @@ struct todayReminders: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top)
 
                 // Thin gray rectangle
                 Rectangle()
-                    .fill(Color.gray)
+                    .fill(Color.gray.opacity(0.2))
                     .frame(height: 1)
-                    .padding(.bottom,1)
+                    
 
                 // Today label
-               
                 Text("Today")
                     .font(.title)
                     .fontWeight(.bold)
                     .frame(width: 200, height: 100)
                     .padding(.trailing, 290)
-                   
-                
+
+                // Plant List
+                List {
+                    ForEach(plants.indices, id: \.self) { index in
+                        HStack {
+                            Image(systemName: completionStatus[index] ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(completionStatus[index] ? .green : .gray)
+                                .onTapGesture {
+                                    completionStatus[index].toggle() // Toggle completion status for the specific plant
+                                }
+
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Image(systemName: "location")
+                                        .foregroundColor(.gray)
+                                    Text("in Bedroom")
+                                        .foregroundColor(Color.gray)
+                                }
+                                
+                                Text(plants[index])
+                                    .font(.title) // Increased font size
+                                HStack {
+                                    HStack {
+                                        Image(systemName: "sun.max")
+                                            .foregroundColor(.yelloww)
+                                        Text("Full sun")
+                                            .foregroundColor(.yelloww)
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(12)
+                                    
+                                    HStack {
+                                        Image(systemName: "drop")
+                                            .foregroundColor(.bluee)
+                                        Text("20-50 ml")
+                                            .foregroundColor(.bluee)
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(12)
+                                }
+                            }
+                        }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                plants.remove(at: index) // Handle deletion here
+                                completionStatus.remove(at: index) // Remove the corresponding completion status
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                        }
+                       
+                    }
+                }
+                .listStyle(PlainListStyle())
+
+                Spacer() // Push the circular button to the bottom
+
+                // HStack for Add Icon and Text
                 HStack {
-                    Image(systemName: "location")
-                        .foregroundColor(.gray)
-                    Text("in Bedroom")
-                        .foregroundColor(Color.gray)
-                        .frame(alignment: .leading)
-                        .padding(.trailing,210)
-                                           
-               }
-                
-                HStack{
-                    Image(systemName: "circle")
-                        .foregroundColor(.gray)
+                    // Circular Add Icon
                     
-                    Text("Pothos")
-                        .font(.title) // Increased font size
-                    Spacer()
-                    
-                }
-                HStack{
-                    HStack{
-                        Image(systemName: "sun.max")
-                            .foregroundColor(.yelloww)
-                        Text("Full sun")
-                            .foregroundColor(Color.yelloww)
                         
-                    }
-                    .padding(.horizontal, 12) // Increase horizontal padding
-                    .padding(.vertical, 6) // Maintain vertical padding
-                    .background(Color.gray.opacity(0.2)) // Gray background
-                    .cornerRadius(12) // Rounded corners
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.greeen) // Icon color
+                            .font(.largeTitle)
+                            .frame(width: .infinity,alignment: .bottom)
+                            .controlSize(ControlSize.extraLarge)// Icon size
                     
-                    HStack{
-                        Image(systemName: "drop")
-                            .foregroundColor(.bluee)
-                        Text("20-50 ml ")
-                            .foregroundColor(Color.bluee)
-                        
+                    .onTapGesture {
+                        // Action to add a new reminder
                     }
-                            .padding(.horizontal, 12) // Increase horizontal padding
-                            .padding(.vertical, 6) // Maintain vertical padding
-                            .background(Color.gray.opacity(0.2)) // Gray background
-                            .cornerRadius(12) // Rounded corners
-                    Spacer()
+
+                    Text("New Reminder")
+                        .foregroundColor(.greeen) // Text color
+    
                 }
-                
-                Divider()
+                .padding(.trailing, 145)
                 .padding()
-                
-                
-                HStack {
-                    Image(systemName: "location")
-                        .foregroundColor(.gray)
-                    Text("in Bedroom")
-                        .foregroundColor(Color.gray)
-                        .frame(alignment: .leading)
-                        .padding(.trailing,210)
-                                           
-               }
-                
-                HStack{
-                    Image(systemName: "circle")
-                        .foregroundColor(.gray)
-                    
-                    Text("Pothos")
-                        .font(.title) // Increased font size
-                    Spacer()
-                    
-                }
-                HStack{
-                    HStack{
-                        Image(systemName: "sun.max")
-                            .foregroundColor(.yelloww)
-                        Text("Full sun")
-                            .foregroundColor(Color.yelloww)
-                        
-                    }
-                    .padding(.horizontal, 12) // Increase horizontal padding
-                    .padding(.vertical, 6) // Maintain vertical padding
-                    .background(Color.gray.opacity(0.2)) // Gray background
-                    .cornerRadius(12) // Rounded corners
-                    
-                    HStack{
-                        Image(systemName: "drop")
-                            .foregroundColor(.bluee)
-                        Text("20-50 ml ")
-                            .foregroundColor(Color.bluee)
-                        
-                    }
-                            .padding(.horizontal, 12) // Increase horizontal padding
-                            .padding(.vertical, 6) // Maintain vertical padding
-                            .background(Color.gray.opacity(0.2)) // Gray background
-                            .cornerRadius(12) // Rounded corners
-                   
-                Spacer()
-                   
-                }
-                Divider()
-                
-            Spacer()
-                
-            
             }
-            
             .padding()
         }
     }
 }
 
-
-struct todayReminders_Previews: PreviewProvider {
+struct TodayReminders_Previews: PreviewProvider {
     static var previews: some View {
-        todayReminders()
+        TodayReminders()
     }
 }

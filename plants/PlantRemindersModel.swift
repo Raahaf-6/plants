@@ -12,3 +12,17 @@ func addReminder(_ reminder: PlantReminder) {
     // Optionally, implement logic to save to persistent storage here
 }
 }
+
+
+//import SwiftUI
+//import Combine
+//
+//
+//class PlantReminderModel: ObservableObject {
+//    @Published var reminders: [PlantReminder] = []
+//
+//    func addReminder(_ reminder: PlantReminder) {
+//        reminders.append(reminder)
+//    }
+//}
+
